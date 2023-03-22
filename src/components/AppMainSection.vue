@@ -1,12 +1,12 @@
 <script lang="ts" setup>
-import SideMenu from './SideMenu.vue';
+import Sidebar from './SideBar/Sidebar.vue';
 
 
 </script>
 
 <template>
   <div class="min-h-screen flex bg-white top-20">
-    <SideMenu />
+    <Sidebar />
     <router-view />
   </div>
 </template>

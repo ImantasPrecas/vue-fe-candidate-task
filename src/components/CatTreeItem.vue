@@ -19,4 +19,12 @@ console.log(props.model);
     </template>
 
   </li>
+  <form action="">
+    <select name="" id="">
+      <option value="1">1</option>
+      <option value="1">1</option>
+      <option value="1">1</option>
+      <input type="text" class="border">
+    </select>
+  </form>
 </template>

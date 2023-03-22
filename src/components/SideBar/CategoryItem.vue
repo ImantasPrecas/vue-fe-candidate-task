@@ -1,26 +1,41 @@
 <script lang="ts" setup>
+import { ref } from 'vue';
 
-const props = defineProps({
-  model: Object,
-})
-console.log(props.model);
+interface Nodes {
+  name: string,
+  children?: Array<Nodes>
+}
+defineProps<{
+  name: string,
+  children?: Array<Nodes>
+}>()
+
+const isOpen = ref(false)
+
+function toggle() {
+  isOpen.value = !isOpen.value
+}
+
+const printName = (name) => {
+  console.log(name);
+
+}
 
 </script>
 
 <template>
-  <div class="text-md flex flex-col -translate-x-4 items-end mt-4">
-    <li v-for="category in model" :key="category" class="mt-2">
+  <li class="font-semibold text-gray-500 hover:text-gray-700 cursor-pointer mr-5 py-2">
 
-      <div class="font-semibold text-gray-500 hover:text-gray-800 ">
-        {{ category.name }}
-      </div>
+    <div @click="toggle">
+      <button @click="printName(name)">
+        {{ name }}
+      </button>
+    </div>
+  </li>
+  <li class="mr-4 mt-2" v-if="isOpen">
+    <div>
+      <category-item v-for="item in children" :name="item.name" :children="item.children"></category-item>
+    </div>
 
-      <template v-if="category.children">
-        <div class="text-sm font-extralight">
-
-          <CategoryItem :model="category.children" />
-        </div>
-      </template>
-    </li>
-  </div>
+  </li>
 </template>

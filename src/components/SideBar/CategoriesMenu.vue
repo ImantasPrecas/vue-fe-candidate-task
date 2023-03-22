@@ -1,20 +1,15 @@
 <script lang="ts" setup>
 import CategoryItem from './CategoryItem.vue'
 import { DUMMY_DATA } from '../../../data/dummyData'
-import { ref, reactive } from 'vue';
+import { ref } from 'vue';
 
-
-const categoryTree = reactive(DUMMY_DATA)
-
-const isOpen = ref(false)
-function toggle() {
-  isOpen.value = !isOpen.value
-}
-
+const categoryTree = ref(DUMMY_DATA)
 </script>
 
 <template>
   <ul class="text-end">
-    <CategoryItem :model="categoryTree" />
+    <li class="flex flex-col" v-for="tree in categoryTree" :key="tree.name">
+      <CategoryItem :name="tree.name" :children="tree.children" />
+    </li>
   </ul>
 </template>

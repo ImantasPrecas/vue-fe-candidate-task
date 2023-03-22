@@ -1,7 +1,9 @@
 <script lang="ts" setup>
+import NewCategoryForm from '../components/NewCategoryForm.vue';
+
 
 </script>
 
 <template>
-  <h1>NEW CATEGORY PAGE</h1>
+  <NewCategoryForm />
 </template>

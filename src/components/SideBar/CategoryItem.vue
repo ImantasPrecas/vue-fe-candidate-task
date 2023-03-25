@@ -1,9 +1,10 @@
 <script lang="ts" setup>
 import { ref } from 'vue';
 
+
 interface Nodes {
   name: string,
-  children?: Array<Nodes>
+  children?: Array<Nodes>,
 }
 defineProps<{
   name: string,
@@ -16,7 +17,7 @@ function toggle() {
   isOpen.value = !isOpen.value
 }
 
-const printName = (name) => {
+const printName = (name: string) => {
   console.log(name);
 
 }
@@ -34,7 +35,7 @@ const printName = (name) => {
   </li>
   <li class="mr-4 mt-2" v-if="isOpen">
     <div>
-      <category-item v-for="item in children" :name="item.name" :children="item.children"></category-item>
+      <category-item v-for="item, idx in children" :key="idx" :name="item.name" :children="item.children"></category-item>
     </div>
 
   </li>

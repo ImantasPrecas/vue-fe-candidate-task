@@ -1,7 +1,11 @@
 <script lang="ts" setup>
+import { DUMMY_DATA, User } from '../../data/dummyData';
 import { ref, reactive } from 'vue';
 
-const user = reactive({
+const data = ref(DUMMY_DATA)
+
+
+const user: User = reactive({
   id: Date.now(),
   name: '',
   lastname: '',
@@ -13,10 +17,34 @@ const user = reactive({
 })
 const inputClasses = ref('py-2 px-2 bg-transparent ring-transparent focus:outline-none border-b-2 ');
 
-function submitForm() {
 
-  console.log(user);
+const addUser = (array, searchTerm, newUser) => {
+
+  for (let index = 0; index < array.length; index++) {
+    console.log(array[index].name);
+
+    for (let innerIndex = 0; innerIndex < array[index].children.length; innerIndex++) {
+      console.log(array[index].children[innerIndex].name);
+
+      for (let innerInnerIndex = 0; innerInnerIndex < array[index].children[innerIndex].children.length; innerInnerIndex++) {
+        const element = array[index].children[innerIndex].children[innerInnerIndex]
+        console.log(element);
+        if (searchTerm === element.name) {
+          element.users.push(newUser)
+
+        }
+
+      }
+    }
+    console.log('--');
+
+  }
 }
+
+function submitForm() {
+  addUser(data.value, user.category, user)
+}
+
 </script>
 
 <template>
@@ -37,7 +65,15 @@ function submitForm() {
         </div>
         <select :class="inputClasses" v-model="user.category" class="text-gray-400">
           <option value="" selected disabled class="text-gray-400">Select category</option>
-          <option value="1">Category1</option>
+          <template v-for="category in data" :key="category">
+            <optgroup :label="category.name">
+              <template v-for="subCategory in category.children">
+                <template v-for="subSubCat in subCategory.children" :key="subSubCat.name">
+                  <option :value="subSubCat.name">{{ subSubCat.name }}</option>
+                </template>
+              </template>
+            </optgroup>
+          </template>
         </select>
         <button
           class="bg-black opacity-30 hover:opacity-60 focus:bg-gray-200 focus:text-black border-gray-200  border-2 focus:border-black py-2 rounded-full  text-white">Submit</button>

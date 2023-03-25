@@ -8,7 +8,7 @@ const categoryTree = ref(DUMMY_DATA)
 
 <template>
   <ul class="text-end">
-    <li class="flex flex-col" v-for="tree in categoryTree" :key="tree.name">
+    <li class="flex flex-col" v-for="tree, idx in categoryTree" :key="idx">
       <CategoryItem :name="tree.name" :children="tree.children" />
     </li>
   </ul>

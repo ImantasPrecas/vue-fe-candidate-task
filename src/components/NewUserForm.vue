@@ -3,6 +3,7 @@ import { DUMMY_DATA, User } from '../../data/dummyData';
 import { ref, reactive } from 'vue';
 
 const data = ref(DUMMY_DATA)
+let userCreated = reactive({ isCreated: false })
 
 
 const user: User = reactive({
@@ -18,7 +19,7 @@ const user: User = reactive({
 const inputClasses = ref('py-2 px-2 bg-transparent ring-transparent focus:outline-none border-b-2 ');
 
 
-const addUser = (array, searchTerm, newUser) => {
+function addUser(array, searchTerm, newUser) {
 
   for (let index = 0; index < array.length; index++) {
     console.log(array[index].name);
@@ -31,7 +32,6 @@ const addUser = (array, searchTerm, newUser) => {
         console.log(element);
         if (searchTerm === element.name) {
           element.users.push(newUser)
-
         }
 
       }
@@ -43,6 +43,7 @@ const addUser = (array, searchTerm, newUser) => {
 
 function submitForm() {
   addUser(data.value, user.category, user)
+  userCreated.isCreated = true
 }
 
 </script>
@@ -80,5 +81,8 @@ function submitForm() {
 
       </div>
     </form>
+    <div v-if="userCreated.isCreated" class="mt-4 text-center border rounded-full p-2 shadow-sm">
+      <p>{{ user.name }} succesfully created in {{ user.category }}</p>
+    </div>
   </div>
 </template>

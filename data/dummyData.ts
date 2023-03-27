@@ -45,7 +45,7 @@ export interface User {
 }
 
 export interface Data {
-  name?: string;
+  name: string;
   children?: Data[];
   users?: User[];
 }

@@ -118,11 +118,11 @@ function onAddNewSubSubCategory() {
 </script>
 
 <template >
-  <div class="flex flex-col mx-auto my-40">
+  <div class="flex flex-col mx-auto my-40 w-50">
     <form class="flex flex-col gap-2">
       <!-- CATEGORY -->
-      <div>
-        <select name="category" :class="inputClasses" v-model="categorySelected" @change="onSelectCategory">
+      <div class="w-full">
+        <select name="category" :class="inputClasses" class='w-52' v-model="categorySelected" @change="onSelectCategory">
           <option value="" selected disabled>-Select Category-</option>
           <option :value="category.name" v-for="category in data" :key="category.name">{{ category.name }}</option>
         </select>
@@ -134,9 +134,10 @@ function onAddNewSubSubCategory() {
       </div>
       <!-- /CATEGORY -->
       <!-- SUBCATEGORY -->
-      <div v-if="categorySelected">
-        <select name="subCategory" :class="inputClasses" @change="onSelectSubCategory" v-model="subCategoryselected">
-          <!-- <option value="" selected disabled>-Select subCategory-</option> -->
+      <div v-if="categorySelected" class="w-full">
+        <select name="subCategory" :class="inputClasses" class='w-52' @change="onSelectSubCategory"
+          v-model="subCategoryselected">
+          <option value="" selected disabled>-Select subCategory-</option>
           <option :value="option" v-for="option in categories.subCategories" :key="option"> {{ option }}</option>
         </select>
         <span class="mx-2">- or -</span>
@@ -148,7 +149,7 @@ function onAddNewSubSubCategory() {
       <!-- /SUBCATEGORY -->
       <!-- SUBSUBCATEGORY -->
       <div v-if="subCategoryselected">
-        <input type="text" placeholder="Create new sub-sub-category" v-model="newSubSubCategoryInput"
+        <input type="text" placeholder="Create new sub-sub-category" class="w-full" v-model="newSubSubCategoryInput"
           :class="inputClasses">
         <button @click.prevent="onAddNewSubSubCategory"
           class="bg-black opacity-30 hover:opacity-60 focus:bg-gray-200 focus:text-black border-gray-200  border-2 focus:border-black py-2 px-2 rounded-full  text-white">Add
